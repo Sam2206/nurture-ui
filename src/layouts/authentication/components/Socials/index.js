@@ -32,7 +32,7 @@ function Socials() {
     const setAuthToken = (token) => {
         //axios.defaults.baseURL= 'http://localhost:8080'
         if (token) {
-            setTokenCookie(token);
+            localStorage.setItem('token', token)
             // Apply the token to all requests' headers
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } else {
@@ -40,16 +40,6 @@ function Socials() {
             delete axiosInstance.defaults.headers.common['Authorization'];
         }
     };
-
-    function setTokenCookie(token) {
-        // Set the token cookie with a 1-hour expiration time
-        document.cookie = `access_token=${token}; max-age=3600; path=/; secure; samesite=strict`;
-      }
-
-    function getTokenCookie() {
-        const match = document.cookie.match('/(^| )access_token=([^;]+)/');
-        return match ? match[2] : null;
-      }
 
     function loginToUpdateClaim(token, user) {
         const loginUri = '/api/v1/auth/login';
