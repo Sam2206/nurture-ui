@@ -137,7 +137,7 @@ function DashboardNavbar({absolute, light, isMini}) {
     );
 
     const navigate = useNavigate();
-    function signOutUser() {
+     function signOutUser() {
         auth.signOut().then(r => navigate('/authentication/sign-in/basic'));
     }
 
