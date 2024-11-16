@@ -24,6 +24,10 @@ import Tab from "@mui/material/Tab";
 
 // BalAsha - Nurture components
 import SoftBox from "components/SoftBox";
+import SoftButton from "components/SoftButton";
+import SoftTypography from "components/SoftTypography";
+import SoftInput from "components/SoftInput";
+import SoftSelect from "components/SoftSelect";
 
 // BalAsha - Nurture base styles
 import breakpoints from "assets/theme/base/breakpoints";
@@ -58,21 +62,32 @@ function BaseLayout({ stickyNavbar, children }) {
   }, [tabsOrientation]);
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  const handleFormSubmit = () => {};
 
   return (
     <DashboardLayout>
       <DashboardNavbar absolute={!stickyNavbar} isMini />
       <SoftBox mt={stickyNavbar ? 3 : 10}>
         <Grid container>
-          <Grid item xs={12} sm={8} lg={4}>
-            <AppBar position="static">
+          <Grid item xs={12} sm={6} lg={6}>
+            <SoftBox p={3}>
+              <SoftTypography variant="h5">Child Registration</SoftTypography>
+            </SoftBox>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={6}>
+            <SoftBox display="flex" justifyContent="flex-end">
+              <SoftButton variant="gradient" color="info">
+                Register
+              </SoftButton>
+            </SoftBox>
+            {/* <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
-                <Tab label="Messages" />
-                <Tab label="Social" />
+                <Tab label="Stage1" />
+                {/* <Tab label="Social" />
                 <Tab label="Notifications" />
-                <Tab label="Backup" />
-              </Tabs>
-            </AppBar>
+                <Tab label="Backup" /> 
+              </Tabs>  
+            </AppBar> */}
           </Grid>
         </Grid>
         {children}

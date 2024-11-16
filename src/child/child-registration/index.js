@@ -13,56 +13,114 @@
 
 // @mui material components
 import Grid from "@mui/material/Grid";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 // BalAsha - Nurture components
 import SoftBox from "components/SoftBox";
 
 // ChildRegistration page components
 import BaseLayout from "child/child-registration/components/BaseLayout";
-import Sidenav from "child/child-registration/components/Sidenav";
-import Header from "child/child-registration/components/Header";
+
 import BasicInfo from "child/child-registration/components/BasicInfo";
-import ChangePassword from "child/child-registration/components/ChangePassword";
-import Authentication from "child/child-registration/components/Authentication";
-import Accounts from "child/child-registration/components/Accounts";
-import Notifications from "child/child-registration/components/Notifications";
-import Sessions from "child/child-registration/components/Sessions";
-import DeleteAccount from "child/child-registration/components/DeleteAccount";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme }) => ({
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+  variants: [
+    {
+      props: ({ expand }) => !expand,
+      style: {
+        transform: "rotate(0deg)",
+      },
+    },
+    {
+      props: ({ expand }) => !!expand,
+      style: {
+        transform: "rotate(180deg)",
+      },
+    },
+  ],
+}));
 
 function ChildRegistration() {
+  const [expandedbasic, setExpandedBasic] = React.useState(true);
+  const [expandedother, setExpandedOther] = React.useState(false);
+
+  const handleExpandBasicClick = () => {
+    setExpandedBasic(!expandedbasic);
+  };
+  const handleExpandOtherClick = () => {
+    setExpandedOther(!expandedother);
+  };
+
   return (
     <BaseLayout>
       <SoftBox mt={4}>
         <Grid container spacing={3}>
-          <Grid item xs={12} lg={3}>
-            <Sidenav />
-          </Grid>
-          <Grid item xs={12} lg={9}>
+          <Grid item xs={12}>
             <SoftBox mb={3}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Header />
+                  <Card>
+                    <CardActions disableSpacing>
+                      <CardHeader title="Basic Info" />
+                      <ExpandMore
+                        expand={expandedbasic}
+                        onClick={handleExpandBasicClick}
+                        aria-expanded={expandedbasic}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </ExpandMore>
+                    </CardActions>
+
+                    <Collapse in={expandedbasic} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        <BasicInfo />
+                      </CardContent>
+                    </Collapse>
+                  </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <BasicInfo />
-                </Grid>
-                <Grid item xs={12}>
-                  <ChangePassword />
-                </Grid>
-                <Grid item xs={12}>
-                  <Authentication />
-                </Grid>
-                <Grid item xs={12}>
-                  <Accounts />
-                </Grid>
-                <Grid item xs={12}>
-                  <Notifications />
-                </Grid>
-                <Grid item xs={12}>
-                  <Sessions />
-                </Grid>
-                <Grid item xs={12}>
-                  <DeleteAccount />
+                  <Card>
+                    <CardActions disableSpacing>
+                      <CardHeader title="Other Info" />
+                      <ExpandMore
+                        expand={expandedother}
+                        onClick={handleExpandOtherClick}
+                        aria-expanded={expandedother}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </ExpandMore>
+                    </CardActions>
+
+                    <Collapse in={expandedother} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        <BasicInfo />
+                      </CardContent>
+                    </Collapse>
+                  </Card>
                 </Grid>
               </Grid>
             </SoftBox>
