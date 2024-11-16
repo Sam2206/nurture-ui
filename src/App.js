@@ -68,6 +68,7 @@
  import axiosInstance, {setupResponseInterceptor} from "./platform/axiosConfig";
  import UnAuthorizedUser from "./layouts/default/error";
  import { UserContext } from "custom/UserContext";
+import { signOut } from "firebase/auth";
  
  export default function App() {
      const [controller, dispatch] = useSoftUIController();
@@ -126,31 +127,55 @@
  
              return null;
          });
+
+         const setAuthToken = (token) => {
+            localStorage.setItem("token", token);
+          };
+
+          const removeAuthToken = () => {
+            localStorage.removeItem("token");
+          }
+        
+          function loginCheckAllowedAndGetClaims(user) {
+            const loginUri = "/api/v1/auth/login";
+            axiosInstance
+              .post(loginUri)
+              .then(() => {
+                user
+                  .getIdToken(true) // 'true' forces a refresh of the token
+                  .then((newIdToken) => {
+                    // Store the updated token in localStorage or cookies
+                    setAuthToken(newIdToken);
+                    setLoggedUser(user);
+                    navigate("/dashboards/default");
+                  })
+                  .catch((error) => {
+                    removeAuthToken();
+                    console.error(error);
+                    auth.signOut().then(r => navigate('/error'));
+                  });
+              })
+              .catch((err) => {
+                console.error(err);
+                removeAuthToken();
+                auth.signOut().then(r => navigate('/error'))
+              });
+          }
+        
+          useEffect(() => {
+            auth.onAuthStateChanged((user) => {
+              debugger;
+              if (user) {
+                console.log("Current Logged In User: ", user.displayName);
+                user.getIdToken(true).then((token) => {
+                  loginCheckAllowedAndGetClaims(user);
+                });
+              }
+              
+            });
+          }, []);
  
-     function loginToUpdateClaim(user) {
-         const loginUri = '/api/v1/auth/login';
-         axiosInstance.post(loginUri)
-             .then(() => {
-                 navigate('/dashboards/default');
-             })
-             .catch((err) => {
-                 navigate('/error');
-                 console.error(err)
-             });
-     }
- 
-     useEffect(() => {
- 
-         auth.onAuthStateChanged(user => {
-             if (user) {
-                 user.getIdToken(true).then(token => {
-                     axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                     loginToUpdateClaim(user);
-                 })
-             }
-             setLoggedUser(user);
-         })
-     }, []);
+     
  
      
      // Setting the dir attribute for the body element
