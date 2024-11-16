@@ -41,7 +41,7 @@ function Socials() {
         }
     };
 
-    function loginToUpdateClaim(token, user) {
+    function loginToUpdateClaim(user) {
         const loginUri = '/api/v1/auth/login';
         axiosInstance.post(loginUri)
             .then(() => {
@@ -71,7 +71,7 @@ function Socials() {
                 const user = result.user;
 
                 user.getIdToken(true).then(token => {
-                    loginToUpdateClaim(token, user);
+                    loginToUpdateClaim(user);
                 })
 
                 let additionalUserInfo = getAdditionalUserInfo(result);
