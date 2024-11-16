@@ -1,0 +1,86 @@
+// Example data for dropdowns
+const stage1Data = {
+  gender: [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+  ],
+  childClassification: [
+    { value: "abandoned", label: "Abandoned / Family Not Traceable" },
+    { value: "orphanedNoGuardians", label: "Orphaned - No Guardians" },
+    {
+      value: "financiallyDistressed",
+      label: "Child having financially distressed parents and/or single Parent",
+    },
+    { value: "unfitParents", label: "Child having Unfit Parent(s)" },
+    { value: "orphanedUnfitGuardians", label: "Orphaned having Unfit Guardians" },
+    { value: "surrendered", label: "Surrendered" },
+    { value: "trafficked", label: "Child was trafficked or given in illegal adoption" },
+  ],
+  healthStatus: [
+    { value: "normal", label: "Normal" },
+    { value: "specialNeeds", label: "Special Needs" },
+    { value: "medicalCondition", label: "Medical Condition" },
+  ],
+  shelterHome: [
+    { value: "abc", label: "ABC - Aditya Birla Centre For The Welfare Of Children" },
+    { value: "abm", label: "ABM - The Children Aid Society Sanchalit Atirikt Balgruh Mulinche" },
+    { value: "adb", label: "ADB - A.D. Bawla Girl's Home" },
+    { value: "asm", label: "ASM - MSWC Asha Sadan" },
+    { value: "bat", label: "BAT - Bal Asha Trust" },
+    { value: "bbs", label: "BBS - Bosco Boys Welfare Society" },
+    { value: "bjh", label: "BJH - B.J.Home" },
+    { value: "btc", label: "BTC - Bombay Teen Challenge" },
+    { value: "bva", label: "BVA - The Bombay Vigilance Association" },
+    { value: "cas", label: "CAS - The Children Aid Society Sanchalit Chembur Children Home" },
+    { value: "ccd", label: "CCD - Committed Communities Development Trust" },
+    { value: "cdc", label: "CDC - Community Development Center (Prem Niketan)" },
+    { value: "des", label: "DES - Desire Society" },
+    { value: "dns", label: "DNS - DN Sirur Balakashram" },
+    { value: "dsi", label: "DSI - The Childrens Aid Society's David Sassoon Industrial School" },
+    { value: "fhs", label: "FHS - Family Home Guild of Service" },
+    {
+      value: "kvb",
+      label: "KVB - The Children Aid Society Sanchalit Balkalyan Nagar Kanishtha Varishtha Balgruh",
+    },
+    { value: "mhm", label: "MHM - Maranatha Harvest Mission Orphanage Society" },
+    { value: "mss", label: "MSS - Shree Manav Seva Sangh" },
+    { value: "nbm", label: "NBM - The Children Aid Society Sanchalit Naveen Balgruh Mulanche" },
+    { value: "ohd", label: "OHD - The Children Aid Society Mumbai Sanchalit Observation Home" },
+    { value: "sah", label: "SAH - St. Anthonys Home and High School Society" },
+    { value: "sch", label: "SCH - St. Catherine's Home" },
+    { value: "sha", label: "SHA - Snehasadan - House No. 4" },
+    { value: "shm", label: "SHM - Society Of The Helpers Of Mary" },
+    { value: "shs", label: "SHS - Snehasadan - House No. 6" },
+    { value: "sjh", label: "SJH - St. Joseph Home And Nursery" },
+    { value: "smm", label: "SMM - Shraddhanand Mahilashram" },
+    { value: "snh", label: "SNH - Snehasadan - House No. 3" },
+    { value: "ssa", label: "SSA - Snehasadan - House No. 5" },
+    { value: "ssb", label: "SSB - Snehasadan - House No. 8" },
+    { value: "ssc", label: "SSC - Snehasadan - House No. 9" },
+    { value: "ssd", label: "SSD - Snehasadan - House No. 10" },
+    { value: "sse", label: "SSE - Snehasadan - House No. 11" },
+    { value: "ssf", label: "SSF - Snehasadan - House No. 12" },
+    { value: "ssh", label: "SSH - Snehasadan - House No. 7" },
+    { value: "ssn", label: "SSN - Snehasadan - House No. 16" },
+    {
+      value: "sup",
+      label: "SUP - Society Undertaking Poor People's Onus For Rehabilitation - Boys",
+    },
+    {
+      value: "sur",
+      label: "SUR - Society Undertaking Poor People's Onus For Rehabilitation - Girls",
+    },
+    { value: "vtt", label: "VTT - Vatsalya Trust" },
+  ],
+
+  currentStatus: [
+    { value: "active", label: "Active" },
+    { value: "inactive", label: "Inactive" },
+  ],
+  yesNo: [
+    { value: "yes", label: "Yes" },
+    { value: "no", label: "No" },
+  ],
+};
+
+export default stage1Data;

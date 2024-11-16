@@ -1,154 +1,84 @@
-/**
-=========================================================
-* BalAsha - Nurture - v4.0.2
-=========================================================
-
-* Product Page: https://balasha-nurture.web.app/product/soft-ui-dashboard-react
-* Copyright 2024 BalAsha - Nurture (https://balasha-nurture.web.app)
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState } from "react";
-
-// @mui core components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-
-// BalAsha - Nurture components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftSelect from "components/SoftSelect";
-import SoftTagInput from "components/SoftTagInput";
+import FormField from "child/child-registration/components/FormField";
+import stage1Data from "./data/data";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 
-// Settings page components
-import FormField from "layouts/pages/account/components/FormField";
-
-// Data
-import selectData from "layouts/pages/account/settings/components/BasicInfo/data/selectData";
-
-function BasicInfo() {
-  const [skills, setSkills] = useState(["react", "angular"]);
+function Stage1Info() {
+  const [skills, setSkills] = useState([]);
 
   return (
-    <Card id="basic-info" sx={{ overflow: "visible" }}>
-      <SoftBox p={3}>
-        <SoftTypography variant="h5">Basic Info</SoftTypography>
-      </SoftBox>
+    <Card id="child-registration" sx={{ overflow: "visible" }}>
+      {/* <SoftBox p={3}>
+        <SoftTypography variant="h5">Child Registration</SoftTypography>
+      </SoftBox> */}
       <SoftBox component="form" pb={3} px={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <FormField label="first name" placeholder="Alec" />
+            <FormField label="Full Name" placeholder="Enter child's full name" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormField label="last name" placeholder="Thompson" />
+            <FormField label="Date of Birth" placeholder="DD/MM/YYYY" />
           </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={4}>
-                <SoftBox
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="flex-end"
-                  height="100%"
-                >
-                  <SoftBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
-                    <SoftTypography
-                      component="label"
-                      variant="caption"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                    >
-                      I&apos;m
-                    </SoftTypography>
-                  </SoftBox>
-                  <SoftSelect placeholder="Male" options={selectData.gender} />
-                </SoftBox>
-              </Grid>
-              <Grid item xs={12} sm={8}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={5}>
-                    <SoftBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                      height="100%"
-                    >
-                      <SoftBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
-                        <SoftTypography
-                          component="label"
-                          variant="caption"
-                          fontWeight="bold"
-                          textTransform="capitalize"
-                        >
-                          birth date
-                        </SoftTypography>
-                      </SoftBox>
-                      <SoftSelect placeholder="February" options={selectData.birthDate} />
-                    </SoftBox>
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <SoftBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                      height="100%"
-                    >
-                      <SoftSelect placeholder={1} options={selectData.days} />
-                    </SoftBox>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <SoftBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                      height="100%"
-                    >
-                      <SoftSelect placeholder={2021} options={selectData.years} />
-                    </SoftBox>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+          {/* <Grid item xs={12} sm={6}>
+            <input accept="image/*" id="upload-avatar-pic" type="file" hidden />
+            <label htmlFor="upload-avatar-pic">
+              <IconButton component="span">
+                <Avatar />
+              </IconButton>
+            </label>
+          </Grid> */}
+          <Grid item xs={12} sm={6}>
+            <SoftSelect placeholder="Select Gender" options={stage1Data.gender} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormField
-              label="email"
-              placeholder="example@email.com"
-              inputProps={{ type: "email" }}
+            <SoftSelect
+              placeholder="Choose Child Classification"
+              options={stage1Data.childClassification}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormField
-              label="confirmation email"
-              placeholder="example@email.com"
-              inputProps={{ type: "email" }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormField label="your location" placeholder="Sydney, A" />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormField
-              label="phone number"
-              placeholder="+40 735 631 620"
+              label="CWC Case Number"
+              placeholder="Enter case number"
               inputProps={{ type: "number" }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <FormField label="language" placeholder="English" />
+          <Grid item xs={12} sm={6}>
+            <FormField label="CCI Admission Number" placeholder="Enter admission number" />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <SoftBox display="flex" flexDirection="column" justifyContent="flex-end" height="100%">
-              <SoftTagInput
-                tags={skills}
-                placeholder=" "
-                onChange={(newSkill) => setSkills(newSkill)}
-                removeOnBackspace
-              />
-            </SoftBox>
+          <Grid item xs={12} sm={6}>
+            <FormField
+              label="Aadhar Number"
+              placeholder="Enter Aadhar number"
+              inputProps={{ type: "number" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormField label="Reason for Admission" placeholder="Enter reason (2-3 sentences)" />
+          </Grid>
+          <Grid item xs={12}>
+            <FormField label="Case History" placeholder="Enter case history" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SoftSelect placeholder="Health Status" options={stage1Data.healthStatus} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SoftSelect placeholder="Shelter Home" options={stage1Data.shelterHome} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SoftSelect placeholder="Current Status" options={stage1Data.currentStatus} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SoftSelect placeholder="Siblings?" options={stage1Data.yesNo} />
+          </Grid>
+          <Grid item xs={12}>
+            <FormField label="Remark" placeholder="If siblings, provide details" />
           </Grid>
         </Grid>
       </SoftBox>
@@ -156,4 +86,4 @@ function BasicInfo() {
   );
 }
 
-export default BasicInfo;
+export default Stage1Info;
