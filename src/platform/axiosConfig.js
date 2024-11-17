@@ -2,7 +2,7 @@ import axios from 'axios';
 import {auth} from "./firebase";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080', // Set your default base URL here
+    baseURL: 'https://mumkin-backend-e5eecngqgxg3euh9.centralindia-01.azurewebsites.net', // Set your default base URL here
     timeout: 20000, // Set a timeout (optional)
     headers: {
         'Access-Control-Allow-Origin': '*',
