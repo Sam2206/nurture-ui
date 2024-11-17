@@ -164,7 +164,6 @@ import { signOut } from "firebase/auth";
         
           useEffect(() => {
             auth.onAuthStateChanged((user) => {
-              debugger;
               if (user) {
                 console.log("Current Logged In User: ", user.displayName);
                 user.getIdToken(true).then((token) => {
