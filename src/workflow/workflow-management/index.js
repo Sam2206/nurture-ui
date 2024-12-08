@@ -38,15 +38,14 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-// Kanban application components
-import Header from "workflow/workflow-management/components/Header";
-
 // Data
 import { boards } from "workflow/workflow-management/data";
 import Step from "workflow/workflow-management/step-creation";
 import Card from "workflow/workflow-management/components/Card";
 
 import axiosInstance from "platform/axiosConfig";
+
+// Use BoardComponent as you normally would
 
 function WorkFlow() {
   const [newCardForm, setNewCardForm] = useState(false);
@@ -78,27 +77,9 @@ function WorkFlow() {
 
   const handeSetFormValue = (currentTarget) => setFormValue(currentTarget.value);
 
-  const handleSetFormValue = async (event) => {
-    event.preventDefault();
-
-    const newWorkflow = {
-      workflowName: StepName,
-      workflowDescription: StepDescription,
-    };
-
-    alert(JSON.stringify(userDetaill, null, 2));
-
-    const locationsUri = "/api/workflows";
-    try {
-      const response = await axiosInstance.post(locationsUri, newWorkflow);
-      setMessage(`Workflow created successfully: ${JSON.stringify(response.data)}`);
-      setStepName("");
-      setStepDescription("");
-      setIsFormSubmitted(!isFormSubmitted);
-    } catch (err) {
-      console.error(err);
-      setMessage("Failed to create workflow.");
-    }
+  var currentIndex = 1;
+  const handleCardDragEnd = () => {
+    currentIndex = 1;
   };
 
   return (
@@ -182,6 +163,7 @@ function WorkFlow() {
               </SoftBox>
             </SoftBox>
           </Grid>
+
           <Grid container spacing={2}>
             <Grid item xs={6} lg={6}>
               <SoftBox
@@ -205,6 +187,7 @@ function WorkFlow() {
                   initialBoard={boards}
                   allowAddCard
                   allowAddColumn
+                  onCardDragEnd={handleCardDragEnd}
                   renderColumnHeader={({ id, title }, { addCard }) => (
                     <>
                       <SoftBox
@@ -310,28 +293,31 @@ function WorkFlow() {
                       ) : null}
                     </>
                   )}
-                  renderCard={({ id, template }, { dragging }) => (
-                    <>
-                      <SoftBox
-                        key={id}
-                        dragging={dragging.toString() || undefined}
-                        display="block"
-                        width="calc(450px - 40px)"
-                        bgColor="white"
-                        color="text"
-                        borderRadius="md"
-                        mt={2.5}
-                        py={1.875}
-                        px={1.875}
-                        lineHeight={1.5}
-                        sx={{
-                          fontSize: ({ typography: { size } }) => size.md,
-                        }}
-                      >
-                        {typeof template === "string" ? parse(template) : template}
-                      </SoftBox>
-                    </>
-                  )}
+                  renderCard={({ id, template }, { dragging }) => {
+                    return (
+                      <>
+                        <SoftBox
+                          key={id}
+                          dragging={dragging.toString() || undefined}
+                          display="block"
+                          width="calc(450px - 40px)"
+                          bgColor="white"
+                          color="text"
+                          borderRadius="md"
+                          mt={2.5}
+                          py={1.875}
+                          px={1.875}
+                          lineHeight={1.5}
+                          sx={{
+                            fontSize: ({ typography: { size } }) => size.md,
+                          }}
+                        >
+                          {!dragging && currentIndex++}
+                          {typeof template === "string" ? parse(template) : template}
+                        </SoftBox>
+                      </>
+                    );
+                  }}
                   onCardNew={() => null}
                 />
               </SoftBox>

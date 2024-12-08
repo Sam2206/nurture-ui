@@ -242,7 +242,7 @@ function Workflow() {
         />
       </SoftBox>
 
-      <SoftBox>
+      {/* <SoftBox>
         <SoftBox
           position="relative"
           my={4}
@@ -302,9 +302,9 @@ function Workflow() {
             onCardNew={() => null}
           />
         </SoftBox>
-      </SoftBox>
+      </SoftBox> */}
 
-      <SoftBox>
+      {/* <SoftBox>
         <SoftBox
           position="relative"
           my={4}
@@ -364,7 +364,7 @@ function Workflow() {
             onCardNew={() => null}
           />
         </SoftBox>
-      </SoftBox>
+      </SoftBox> */}
     </SoftBox>
   );
 }
