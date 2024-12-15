@@ -40,7 +40,7 @@ CollapsibleCard.propTypes = {
   title: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   onExpandClick: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default CollapsibleCard;

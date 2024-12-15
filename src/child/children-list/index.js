@@ -9,6 +9,7 @@ import stage1Data from "child/child-registration/components/BasicInfo/data/data"
 import axiosInstance from "platform/axiosConfig.js";
 import { useEffect, useState } from "react";
 import gridColumns from "./data/dataTableData";
+import ActionCell from "./ActionCell";
 
 function ChildrenList() {
   const [dataList, setDataList] = useState(null);
@@ -33,6 +34,7 @@ function ChildrenList() {
           shelterHome:
             stage1Data.shelterHome?.find((home) => home.value === child.shelterHomeId)?.label ||
             "N/A",
+          action: <ActionCell childId={child.childId} />,
         }));
 
         setDataList({

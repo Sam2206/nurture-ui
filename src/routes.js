@@ -162,12 +162,6 @@ const routes = [
         component: <ChildRegistration />,
       },
       {
-        name: "Child Entry Form",
-        key: "child-entry-form",
-        route: "/child/child-entry-form",
-        component: <ChildEntryForm />,
-      },
-      {
         name: "All Registrations",
         key: "children-list",
         route: "/child/children-list",

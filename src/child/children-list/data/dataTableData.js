@@ -43,7 +43,12 @@ const gridColumns = [
   {
     Header: "Case History",
     accessor: "caseHistory",
-    width: "25%",
+    width: "20%",
+  },
+  {
+    Header: "Action",
+    accessor: "action",
+    width: "5%",
   },
 ];
 

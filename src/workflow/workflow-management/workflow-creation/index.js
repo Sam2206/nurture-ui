@@ -62,7 +62,6 @@ function Workflow() {
       try {
         const response = await axiosInstance.get("/api/step");
         setWorkflow(response.data);
-        console.log(response.data[0] + "hhhh" + Workflow);
       } catch (err) {
         setError(err.message);
       } finally {
