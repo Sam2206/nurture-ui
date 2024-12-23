@@ -98,7 +98,8 @@ import Error500 from "layouts/authentication/error/500";
 import ChildRegistration from "child/child-registration";
 import ChildEntryForm from "child/child-entry-form";
 import WorkFlow from "workflow/workflow-management";
-import EmployeeRegistration from "user/new-user";
+import MumkinDashboard from "dashboard/mumkin-dashboard";
+
 // BalAsha - Nurture icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
@@ -116,7 +117,19 @@ const routes = [
 
 
   { type: "title", title: "Mumkin Pages", key:  "title-mumkin"  },
-
+  { type: "collapse",
+    name: "Dashboard",
+    key: "mumkinDashboard",
+    icon: <BalAshaUser size="12px"/>,
+    collapse: [
+      {
+        name: "Default",
+        key: "mumkinDashboard",
+        route: "/dashboard",
+        component: <MumkinDashboard />,
+      },
+    ],
+  },
   {
     type: "collapse",
     name: "Employee Management",
@@ -148,14 +161,8 @@ const routes = [
     key: "child-registration",
     route: "/child/child-registration",
     component: <ChildRegistration />,
-      },
-    {
-    name: "Child Entry Form",
-    key: "child-entry-form",
-    route: "/child/child-entry-form",
-    component: <ChildEntryForm />,
       }
-       ],
+    ],
 
   },
 
@@ -173,8 +180,6 @@ const routes = [
 
   },
 
-  { type: "divider", title: "Template Pages", key:  "template-pages"  },
-  { type: "divider", title: "Template Pages", key:  "template-pages"  },
   { type: "divider", title: "Template Pages", key:  "template-pages"  },
 
   { type: "title", title: "Template Pages", key:  "template-pages"  },

@@ -1,0 +1,61 @@
+.workflow-page {
+    padding: 10px;
+  }
+  
+  .step-row {
+    display: flex;
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Align items vertically */
+  }
+  
+  .step-row h2 {
+    margin: 0; /* Remove default margin for better alignment */
+  }
+  
+  .step-card {
+    position: relative; /* Necessary for absolute positioning of the button */
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step-row {
+    display: flex;
+    justify-content: space-between; /* Ensures buttons and text are spaced */
+    align-items: center;
+  }
+  
+  .open-remove {
+    padding: 3px;
+  }
+
+  .status-completed-text {
+    color: green;
+  }
+  
+  .status-pending-text {
+    color: orange;
+  }
+  
+  .status-locked {
+    color: gray;
+  }
+  
+  .status-completed {
+    border-left: 7px solid green;
+    border-right: 7px solid green;
+  }
+  
+  .status-pending {
+    border-left: 7px solid orange;
+    border-right: 7px solid orange;
+  }
+  
+  .status-locked {
+    border-left: 7px solid gray;
+    border-right: 7px solid gray;
+  }
+  

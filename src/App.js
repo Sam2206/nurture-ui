@@ -58,17 +58,12 @@
  import brand from "assets/images/logo-ct.png";
  import {useAuthState} from "react-firebase-hooks/auth";
  import {auth} from "./platform/firebase";
- import SignInBasic from "layouts/authentication/sign-in/basic";
- 
- import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
- import DashboardNavbar from "examples/Navbars/DashboardNavbar";
- import Footer from "examples/Footer";
- import Widgets from "./layouts/pages/widgets";
  import LoginScreen from "./custom/LoginScreen";
  import axiosInstance, {setupResponseInterceptor} from "./platform/axiosConfig";
  import UnAuthorizedUser from "./layouts/default/error";
  import { UserContext } from "custom/UserContext";
-import { signOut } from "firebase/auth";
+import StepDetailsPage from "child/child-workflow/step";
+import ChildWorkflow from "child/child-workflow";
  
  export default function App() {
      const [controller, dispatch] = useSoftUIController();
@@ -147,7 +142,7 @@ import { signOut } from "firebase/auth";
                     // Store the updated token in localStorage or cookies
                     setAuthToken(newIdToken);
                     setLoggedUser(user);
-                    navigate("/dashboards/default");
+                    navigate("/dashboard");
                   })
                   .catch((error) => {
                     removeAuthToken();
@@ -241,7 +236,9 @@ import { signOut } from "firebase/auth";
                      {layout === "vr" && <Configurator/>}
                      <Routes>
                          {getRoutes(routes)}
-                         <Route path="*" element={<Navigate to="/dashboards/default"/>}/>
+                         <Route path="*" element={<Navigate to="/dashboard"/>}/>
+                         <Route path="/child/child-workflow/:registrationId" element={<ChildWorkflow/>}/>
+                         <Route path="/child/child-workflow/step/:stepId" element={<StepDetailsPage/>}/>
                          <Route path="/error" element={<UnAuthorizedUser/>}/>
                      </Routes>
                  </ThemeProvider>
@@ -268,6 +265,8 @@ import { signOut } from "firebase/auth";
                  <Routes>
                      {getRoutes(routes)}
                      <Route path="*" element={<Navigate to="/dashboards/default"/>}/>
+                     <Route path="/child/child-workflow/:registrationId" element={<ChildWorkflow/>}/>
+                     <Route path="/child/child-workflow/step/:stepId" element={<StepDetailsPage/>}/>
                      <Route path="/error" element={<UnAuthorizedUser/>}/>
                  </Routes>
                  </UserContext.Provider>
