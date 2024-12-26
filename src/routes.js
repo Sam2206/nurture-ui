@@ -98,7 +98,7 @@ import Error500 from "layouts/authentication/error/500";
 import ChildRegistration from "child/child-registration";
 import ChildEntryForm from "child/child-entry-form";
 import WorkFlow from "workflow/workflow-management";
-
+import EmployeeRegistration from "user/new-user";
 // BalAsha - Nurture icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
@@ -123,6 +123,12 @@ const routes = [
     key: "user",
     icon: <BalAshaUser size="12px"/>,
     collapse: [
+       {
+            name: "New Users",
+            key: "new-users",
+            route: "/user/new-user",
+            component: <EmployeeRegistration />,
+       },
       {
         name: "Allowed Users",
         key: "allowed-users",
