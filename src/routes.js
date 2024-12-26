@@ -99,6 +99,7 @@ import ChildRegistration from "child/child-registration";
 import ChildEntryForm from "child/child-entry-form";
 import WorkFlow from "workflow/workflow-management";
 import MumkinDashboard from "dashboard/mumkin-dashboard";
+import EmployeeRegistration from "user/new-user";
 
 // BalAsha - Nurture icons
 import Shop from "examples/Icons/Shop";
@@ -161,6 +162,12 @@ const routes = [
     key: "child-registration",
     route: "/child/child-registration",
     component: <ChildRegistration />,
+      },
+      {
+        name: "Child Entry Form",
+        key: "child-entry-form",
+        route: "/child/child-entry-form",
+        component: <ChildEntryForm />,
       }
     ],
 
