@@ -26,84 +26,76 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { UserContext } from "custom/UserContext";
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import axiosInstance from "platform/axiosConfig.js";
-
 
 function ProfileInformation() {
   const [followsMe, setFollowsMe] = useState(true);
   const [answersPost, setAnswersPost] = useState(false);
   const loggedUser = useContext(UserContext);
-  const [user,setUser]=useState(null);
-  let info_data={
+  const [user, setUser] = useState(null);
+  let info_data = {
     fullName: loggedUser.userName,
-    email: loggedUser.userEmail,};
+    email: loggedUser.userEmail,
+  };
 
-
-
-
-  useEffect(()=>{
-
-   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(loggedUser),
-
+  useEffect(() => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loggedUser),
     };
 
-    const locationsUri = '/get-users';
-    axiosInstance.get(locationsUri,loggedUser).then(data => {
-      setUser(data.data[0]);
-     
-    }).catch((err) => {
-    console.error(err)
-    });
+    const locationsUri = "/get-users";
+    axiosInstance
+      .get(locationsUri, loggedUser)
+      .then((data) => {
+        setUser(data.data[0]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-  },[])
+  if (user && user != null) {
+    info_data = {
+      fullName: loggedUser.userName,
+      email: loggedUser.userEmail,
+      mobile: user.mobileNo,
+      adress: user.address,
+      userId: user.idDtls,
+      userId: user.idProofType,
+    };
+  }
 
-    // console.log(JSON.stringify(loggedUser));
+  console.log(user);
 
-    if(user && user != null){
-
-      info_data={
-        fullName: loggedUser.userName,
-        email: loggedUser.userEmail,      
-        mobile: user.mobileNo,
-        adress: user.address,
-        userId: user.idDtls,
-        userId: user.idProofType,
-      }
-
-    }
- 
-    console.log(user);
-
-      return (
+  return (
     <ProfileInfoCard
-              title="profile information"
-              description=""
-              info={info_data}
-              social={[
-                {
-                  link: "https://www.facebook.com/BalAsha/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/balasha",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/balashaofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
-              action={{ route: "/pages/users/edit-user", tooltip: "Edit Profile" }}
-            />
-    );
+      title="profile information"
+      description=""
+      info={info_data}
+      social={[
+        {
+          link: "https://www.facebook.com/BalAsha/",
+          icon: <FacebookIcon />,
+          color: "facebook",
+        },
+        {
+          link: "https://twitter.com/balasha",
+          icon: <TwitterIcon />,
+          color: "twitter",
+        },
+        {
+          link: "https://www.instagram.com/balashaofficial/",
+          icon: <InstagramIcon />,
+          color: "instagram",
+        },
+      ]}
+      action={{ route: "/pages/users/edit-user", tooltip: "Edit Profile" }}
+    />
+  );
 }
 // }
 

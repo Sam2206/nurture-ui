@@ -1,0 +1,105 @@
+const form = {
+  formId: "new-child-form",
+  formFields: {
+    fullName: {
+      name: "fullName",
+      label: "Full Name",
+      type: "text",
+      placeholder: "eg. Micheal",
+      errorMsg: "Full name is required.",
+    },
+    dob: {
+      name: "dob",
+      label: "Date of Birth",
+      type: "text", // You can use type 'date' depending on the browser support
+      placeholder: "DD/MM/YYYY",
+      errorMsg: "Date of birth is required.",
+    },
+    gender: {
+      name: "gender",
+      label: "Gender",
+      type: "text",
+      placeholder: "Select Gender",
+      errorMsg: "Gender is required.",
+    },
+    childClassification: {
+      name: "childClassification",
+      label: "Child Classification",
+      type: "text",
+      placeholder: "Choose Classification",
+      errorMsg: "Child classification is required.",
+    },
+    cwcCaseNumber: {
+      name: "cwcCaseNumber",
+      label: "CWC Case Number",
+      type: "text",
+      placeholder: "eg. XXXX XXXX XXXX",
+      errorMsg: "CWC Case Number is required.",
+    },
+    cciAdmissionNumber: {
+      name: "cciAdmissionNumber",
+      label: "CCI Admission Number",
+      type: "text",
+      placeholder: "eg. 123456789",
+      errorMsg: "CCI Admission Number is required.",
+    },
+    aadharNumber: {
+      name: "aadharNumber",
+      label: "Aadhar Number",
+      type: "text",
+      placeholder: "eg. 1234-5678-9012",
+      errorMsg: "Aadhar Number is required.",
+    },
+    reasonForAdmission: {
+      name: "reasonForAdmission",
+      label: "Reason for Admission",
+      type: "text",
+      placeholder: "Enter reason (2-3 sentences)",
+      errorMsg: "Reason for Admission is required.",
+    },
+    caseHistory: {
+      name: "caseHistory",
+      label: "Case History",
+      type: "text",
+      placeholder: "Enter case history",
+      errorMsg: "Case History is required.",
+    },
+    healthStatus: {
+      name: "healthStatus",
+      label: "Health Status",
+      type: "text",
+      placeholder: "Select Health Status",
+      errorMsg: "Health Status is required.",
+    },
+    shelterHome: {
+      name: "shelterHome",
+      label: "Shelter Home",
+      type: "text",
+      placeholder: "Select Shelter Home",
+      errorMsg: "Shelter Home is required.",
+    },
+    currentStatus: {
+      name: "currentStatus",
+      label: "Current Status",
+      type: "text",
+      placeholder: "Select Current Status",
+      errorMsg: "Current Status is required.",
+    },
+    siblings: {
+      name: "siblings",
+      label: "Siblings",
+      type: "text",
+      placeholder: "Select Yes/No",
+      errorMsg: "Siblings information is required.",
+    },
+    remark: {
+      name: "remark",
+      label: "Remark",
+      type: "text",
+      placeholder: "If siblings, provide details",
+      errorMsg: "Remark is required.",
+    },
+  },
+};
+
+export default form;
