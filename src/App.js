@@ -21,6 +21,8 @@ import AutoClose from "layouts/pages/sweet-alerts/components/AutoClose";
 import WithAttachedFunction from "layouts/pages/sweet-alerts/components/WithAttachedFunction";
 import WithSuccessAttachedFunction from "layouts/pages/sweet-alerts/components/WithSuccessAttachedFunction";
 import RtlLanguarge from "layouts/pages/sweet-alerts/components/RtlLanguarge";
+import ChildWorkflow from "child/child-workflow";
+import StepDetailsPage from "child/child-workflow/step";
 
 import Grid from "@mui/material/Grid";
 
@@ -260,6 +262,8 @@ export default function App() {
           <Routes>
             {getRoutes(routes)}
             <Route path="*" element={<Navigate to="/dashboards/default" />} />
+            <Route path="/child/child-workflow/:registrationId" element={<ChildWorkflow />} />
+            <Route path="/child/child-workflow/step/:stepId" element={<StepDetailsPage />} />
             <Route path="/error" element={<UnAuthorizedUser />} />
           </Routes>
         </UserContext.Provider>

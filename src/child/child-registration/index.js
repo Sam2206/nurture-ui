@@ -10,6 +10,9 @@ import form from "./components/Schema/form";
 import axiosInstance from "platform/axiosConfig.js";
 import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
 
 const currentValidation = {};
 
@@ -63,7 +66,7 @@ const ChildRegistration = () => {
     }
   }, [childId]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { resetForm }) => {
     let chidInfo = {
       childId: childId ? childId : undefined,
       name: values.fullName,
@@ -92,54 +95,58 @@ const ChildRegistration = () => {
   const { formId, formFields } = form;
 
   return (
-    <Formik
-      initialValues={childDetails || initialValues}
-      //   validationSchema={currentValidation}
-      enableReinitialize={true}
-      onSubmit={handleSubmit}
-    >
-      {({ values, errors, touched }) => (
-        <Form id={formId} autoComplete="off">
-          <BaseLayout>
-            <SoftBox mt={4}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <SoftBox mb={3}>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12}>
-                        <CollapsibleCard
-                          title="Basic Info"
-                          expanded={expandedbasic}
-                          onExpandClick={handleExpandBasicClick}
-                        >
-                          <BasicInfo
-                            formData={{
-                              formFields,
-                              values,
-                              errors,
-                              touched,
-                            }}
-                          />
-                        </CollapsibleCard>
+    <DashboardLayout>
+      <DashboardNavbar />
+      <Formik
+        initialValues={childDetails || initialValues}
+        //   validationSchema={currentValidation}
+        enableReinitialize={true}
+        onSubmit={handleSubmit}
+      >
+        {({ values, errors, touched }) => (
+          <Form id={formId} autoComplete="off">
+            <BaseLayout>
+              <SoftBox mt={4}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <SoftBox mb={3}>
+                      <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                          <CollapsibleCard
+                            title="Basic Info"
+                            expanded={expandedbasic}
+                            onExpandClick={handleExpandBasicClick}
+                          >
+                            <BasicInfo
+                              formData={{
+                                formFields,
+                                values,
+                                errors,
+                                touched,
+                              }}
+                            />
+                          </CollapsibleCard>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <CollapsibleCard
+                            title="Other Info"
+                            expanded={expandedother}
+                            onExpandClick={handleExpandOtherClick}
+                          >
+                            {/* <BasicInfo />{" "} */}
+                          </CollapsibleCard>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <CollapsibleCard
-                          title="Other Info"
-                          expanded={expandedother}
-                          onExpandClick={handleExpandOtherClick}
-                        >
-                          {/* <BasicInfo />{" "} */}
-                        </CollapsibleCard>
-                      </Grid>
-                    </Grid>
-                  </SoftBox>
+                    </SoftBox>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </SoftBox>
-          </BaseLayout>
-        </Form>
-      )}
-    </Formik>
+              </SoftBox>
+            </BaseLayout>
+          </Form>
+        )}
+      </Formik>
+      <Footer />
+    </DashboardLayout>
   );
 };
 

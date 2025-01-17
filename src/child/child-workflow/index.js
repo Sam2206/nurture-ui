@@ -5,8 +5,8 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import SoftBox from "components/SoftBox";
-import SoftButton from 'components/SoftButton';
-import './child-workflow.css'
+import SoftButton from "components/SoftButton";
+import "./child-workflow.css";
 import { useParams } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate } from "react-router-dom";
@@ -26,10 +26,10 @@ const ChildWorkflow = () => {
   const transformSteps = (response) => {
     return response.map((item) => ({
       caseWorkflowStepId: item.caseWorkflowStepId,
-      id: item.stepId,               
-      name: item.stepName,          
-      description: item.stepDescription, 
-      status: item.stepStatus,            
+      id: item.stepId,
+      name: item.stepName,
+      description: item.stepDescription,
+      status: item.stepStatus,
       approvalStatus: item.approvalStatus,
       updatedBy: item.updatedBy,
       updatedAt: item.updatedAt,
@@ -38,10 +38,10 @@ const ChildWorkflow = () => {
 
   const transformChildDetails = (child) => {
     return {
-      id: child.childId,               
-      name: child.name,           
-      dateOfBirth: child.dateOfBirth, 
-      categoryDesc: child.category.categoryDesc,        
+      id: child.childId,
+      name: child.name,
+      dateOfBirth: child.dateOfBirth,
+      categoryDesc: child.category.categoryDesc,
     };
   };
 
@@ -50,10 +50,14 @@ const ChildWorkflow = () => {
     const fetchWorkflow = async () => {
       try {
         setLoading(true);
+        debugger;
+
         const response = await axiosInstance.get(`/api/v1/caseWorkflow/${registrationId}`);
         setcaseWorkFlow(response.data);
         setChildData(transformChildDetails(response.data.child));
-        const stepsResponse = await axiosInstance.get(`/api/v1/caseWorkflowStep/summary/${response.data.caseWorkflowId}`);
+        const stepsResponse = await axiosInstance.get(
+          `/api/v1/caseWorkflowStep/summary/${response.data.caseWorkflowId}`
+        );
         setSteps(transformSteps(stepsResponse.data));
       } catch (err) {
         setError("Error fetching workflow data");
@@ -78,12 +82,13 @@ const ChildWorkflow = () => {
     setSteps(reorderedSteps);
 
     // Optionally send reordered steps to backend
-    axios.put(`/api/v1/caseWorkflowStep/reorder/${registrationId}`, reorderedSteps)
-      .catch(err => console.error("Error updating workflow steps order:", err));
+    axios
+      .put(`/api/v1/caseWorkflowStep/reorder/${registrationId}`, reorderedSteps)
+      .catch((err) => console.error("Error updating workflow steps order:", err));
   };
 
-   // Handle step deletion
-   const handleDelete = async (stepId) => {
+  // Handle step deletion
+  const handleDelete = async (stepId) => {
     try {
       // Optimistically remove step from UI
       setSteps(steps.filter((step) => step.id !== stepId));
@@ -100,57 +105,56 @@ const ChildWorkflow = () => {
     navigate(`/child/child-workflow/step/${caseWorkflowStepId}`);
   };
 
-  if (loading) return 
-      <BaseLayout>
-        <SoftBox>
-          <p>Loading...</p>
-        </SoftBox>
-      </BaseLayout>;
-  if (error) return 
-      <BaseLayout>
-        <SoftBox>
-          <p>{error}</p>
-      </SoftBox>
-      </BaseLayout>;
+  if (loading) return;
+  <BaseLayout>
+    <SoftBox>
+      <p>Loading...</p>
+    </SoftBox>
+  </BaseLayout>;
+  if (error) return;
+  <BaseLayout>
+    <SoftBox>
+      <p>{error}</p>
+    </SoftBox>
+  </BaseLayout>;
 
   return (
     <DashboardLayout>
-       <DashboardNavbar />
-         <SoftBox>
-          <SoftTypography variant={"h4"}
-                          fontWeight="bold">
-                          Workflow for Child: {childData.name} ({childData.id})
-                        </SoftTypography>
-                <DragDropContext onDragEnd={handleDragEnd}>
-                  <Droppable droppableId="steps">
+      <DashboardNavbar />
+      <SoftBox>
+        <SoftTypography variant={"h4"} fontWeight="bold">
+          Workflow for Child: {childData.name} ({childData.id})
+        </SoftTypography>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="steps">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef} className="steps-list">
+                {steps.map((step, index) => (
+                  <Draggable key={step.id} draggableId={`${step.id}`} index={index}>
                     {(provided) => (
                       <div
-                        {...provided.droppableProps}
                         ref={provided.innerRef}
-                        className="steps-list"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
                       >
-                        {steps.map((step, index) => (
-                          <Draggable key={step.id} draggableId={`${step.id}`} index={index}>
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <StepCard step={step} onOpen={() => handleOpenStep(step.caseWorkflowStepId)} onDelete={handleDelete} />
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
+                        <StepCard
+                          step={step}
+                          onOpen={() => handleOpenStep(step.id)}
+                          onDelete={handleDelete}
+                        />
                       </div>
                     )}
-                  </Droppable>
-                </DragDropContext>
-        </SoftBox>
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </SoftBox>
       <Footer />
     </DashboardLayout>
-);
+  );
 };
 
 const StepsList = ({ steps }) => {
@@ -191,33 +195,43 @@ const StepCard = ({ step, onOpen, onDelete }) => {
 
   return (
     <div className={`step-card ${getStatusClass(step.status)}`}>
-        <div className="step-row">
-        <SoftTypography variant={"h5"}
-                          fontWeight="bold">
-                          {step.name}
-                        </SoftTypography>
-            <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-              <SoftBox display="flex">
-                        <SoftBox mr={1}>
-                          <SoftButton variant="gradient" color="info" size="small" onClick={() => onOpen(step.id)} disabled={step.status === "Locked"}>
-                            open
-                          </SoftButton>
-                        </SoftBox>
-                        <SoftButton variant="outlined" color="dark" size="small" onClick={() => onDelete(step.id)}>
-                          remove
-                        </SoftButton>
-                      </SoftBox>
-            </SoftBox>
-        </div>
       <div className="step-row">
-      <SoftTypography variant={"h6"}>
-                          Updated by: {step.updatedBy}
-                        </SoftTypography>
-      <p className={`${getStatusClass(step.status)}-text`}>{step.status}</p>
+        <SoftTypography variant={"h5"} fontWeight="bold">
+          {step.name}
+        </SoftTypography>
+        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
+          <SoftBox display="flex">
+            <SoftBox mr={1}>
+              <SoftButton
+                variant="gradient"
+                color="info"
+                size="small"
+                onClick={() => onOpen(step.id)}
+                disabled={step.status === "Locked"}
+              >
+                open
+              </SoftButton>
+            </SoftBox>
+            <SoftButton
+              variant="outlined"
+              color="dark"
+              size="small"
+              onClick={() => onDelete(step.id)}
+            >
+              remove
+            </SoftButton>
+          </SoftBox>
+        </SoftBox>
       </div>
-      {step.updatedAt && <SoftTypography variant={"h6"}>
-                          Updated on: {new Date(step.updatedAt).toLocaleString()}
-                        </SoftTypography>}
+      <div className="step-row">
+        <SoftTypography variant={"h6"}>Updated by: {step.updatedBy}</SoftTypography>
+        <p className={`${getStatusClass(step.status)}-text`}>{step.status}</p>
+      </div>
+      {step.updatedAt && (
+        <SoftTypography variant={"h6"}>
+          Updated on: {new Date(step.updatedAt).toLocaleString()}
+        </SoftTypography>
+      )}
     </div>
   );
 };
