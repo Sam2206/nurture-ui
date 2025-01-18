@@ -1,25 +1,12 @@
-/**
-=========================================================
-* BalAsha - Nurture - v4.0.2
-=========================================================
-
-* Product Page: https://balasha-nurture.web.app/product/soft-ui-dashboard-react
-* Copyright 2024 BalAsha - Nurture (https://balasha-nurture.web.app)
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
+import SoftBox from "components/SoftBox"; // Make sure SoftBox is imported from the correct path
+import SoftTypography from "components/SoftTypography"; // Import SoftTypography
+import SoftInput from "components/SoftInput"; // Import SoftInput
 
-// BalAsha - Nurture components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftInput from "components/SoftInput";
+function FormField({ label, field, form, ...rest }) {
+  const { touched, errors } = form;
+  const error = touched[field.name] && errors[field.name]; // Get error message for this field
 
-function FormField({ label, ...rest }) {
   return (
     <SoftBox display="flex" flexDirection="column" justifyContent="flex-end" height="100%">
       <SoftBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
@@ -32,19 +19,35 @@ function FormField({ label, ...rest }) {
           {label}
         </SoftTypography>
       </SoftBox>
-      <SoftInput {...rest} />
+
+      {/* Input field with Formik's `field` props spread */}
+      <SoftInput
+        {...field} // Spread Formik's field props (name, value, onChange, onBlur)
+        {...rest} // Spread any additional props (like placeholder, type, etc.)
+      />
+
+      {/* Display error message if there's any validation error */}
+      {error && (
+        <SoftBox mt={0.5}>
+          <SoftTypography variant="caption" color="error">
+            {error}
+          </SoftTypography>
+        </SoftBox>
+      )}
     </SoftBox>
   );
 }
 
-// Setting default values for the props of FormField
+// Default props
 FormField.defaultProps = {
-  label: " ",
+  label: " ", // Default value for label if not provided
 };
 
-// Typechecking props for FormField
+// Prop validation for FormField component
 FormField.propTypes = {
   label: PropTypes.string,
+  field: PropTypes.object.isRequired, // Formik's field props
+  form: PropTypes.object.isRequired, // Formik's form props
 };
 
 export default FormField;

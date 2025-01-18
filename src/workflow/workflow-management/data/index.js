@@ -34,16 +34,20 @@ export const boards = {
   ],
   columns: [
     {
-      id: uuidv4(),
+      id: "col1",
       title: "New Workflow",
       cards: [
         {
-          id: uuidv4(),
+          id: "card1",
           template: "Police Verfication",
         },
         {
-          id: uuidv4(),
+          id: "card2",
           template: "News Paper Publication",
+        },
+        {
+          id: "card3",
+          template: "test3",
         },
       ],
     },

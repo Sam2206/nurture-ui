@@ -92,13 +92,13 @@ import VerificationIllustration from "layouts/authentication/2-step-verification
 import Error404 from "layouts/authentication/error/404";
 import Error500 from "layouts/authentication/error/500";
 
-
-//Mumkin 
-
+//Mumkin
+import ChildrenList from "child/children-list";
 import ChildRegistration from "child/child-registration";
 import ChildEntryForm from "child/child-entry-form";
 import WorkFlow from "workflow/workflow-management";
 import MumkinDashboard from "dashboard/mumkin-dashboard";
+import EmployeeRegistration from "user/new-user";
 
 // BalAsha - Nurture icons
 import Shop from "examples/Icons/Shop";
@@ -112,15 +112,13 @@ import CreditCard from "examples/Icons/CreditCard";
 import BalAshaUser from "examples/Icons/BalAshaUser";
 import AllowedUserOverview from "./layouts/user";
 
-
 const routes = [
-
-
-  { type: "title", title: "Mumkin Pages", key:  "title-mumkin"  },
-  { type: "collapse",
+  { type: "title", title: "Mumkin Pages", key: "title-mumkin" },
+  {
+    type: "collapse",
     name: "Dashboard",
     key: "mumkinDashboard",
-    icon: <BalAshaUser size="12px"/>,
+    icon: <BalAshaUser size="12px" />,
     collapse: [
       {
         name: "Default",
@@ -134,14 +132,14 @@ const routes = [
     type: "collapse",
     name: "Employee Management",
     key: "user",
-    icon: <BalAshaUser size="12px"/>,
+    icon: <BalAshaUser size="12px" />,
     collapse: [
-       {
-            name: "New Users",
-            key: "new-users",
-            route: "/user/new-user",
-            component: <EmployeeRegistration />,
-       },
+      {
+        name: "New Users",
+        key: "new-users",
+        route: "/user/new-user",
+        component: <EmployeeRegistration />,
+      },
       {
         name: "Allowed Users",
         key: "allowed-users",
@@ -151,38 +149,45 @@ const routes = [
     ],
   },
 
-  { type: "collapse",
+  {
+    type: "collapse",
     name: "Child Management",
     key: "child",
-    icon: <BalAshaUser size="12px"/>,
+    icon: <BalAshaUser size="12px" />,
     collapse: [
       {
-    name: "Child Registration",
-    key: "child-registration",
-    route: "/child/child-registration",
-    component: <ChildRegistration />,
-      }
+        name: "Child Registration",
+        key: "child-registration",
+        route: "/child/child-registration",
+        component: <ChildRegistration />,
+      },
+      {
+        name: "All Registrations",
+        key: "children-list",
+        route: "/child/children-list",
+        component: <ChildrenList />,
+      },
     ],
-
   },
 
-  { type: "collapse",
+  {
+    type: "collapse",
     name: "Workflow Management",
     key: "workflow",
-    icon: <BalAshaUser size="12px"/>,
+    icon: <BalAshaUser size="12px" />,
     collapse: [
       {
-    name: "Workflow",
-    key: "workflow-management",
-    route: "/workflow/workflow-management",
-    component: <WorkFlow />,
-      },],
-
+        name: "Workflow",
+        key: "workflow-management",
+        route: "/workflow/workflow-management",
+        component: <WorkFlow />,
+      },
+    ],
   },
 
-  { type: "divider", title: "Template Pages", key:  "template-pages"  },
+  { type: "divider", title: "Template Pages", key: "template-pages" },
 
-  { type: "title", title: "Template Pages", key:  "template-pages"  },
+  { type: "title", title: "Template Pages", key: "template-pages" },
   {
     type: "collapse",
     name: "Dashboards",
@@ -239,7 +244,7 @@ const routes = [
     type: "collapse",
     name: "User",
     key: "users",
-    icon: <BalAshaUser size="16px"/>,
+    icon: <BalAshaUser size="16px" />,
     collapse: [
       {
         name: "Allowed Users",
@@ -269,7 +274,7 @@ const routes = [
             name: "My Profile",
             key: "my-profile",
             route: "/pages/profile/my-profile",
-            component: <MyProfile/>,
+            component: <MyProfile />,
           },
           {
             name: "Teams",
@@ -282,7 +287,7 @@ const routes = [
             key: "all-projects",
             route: "/pages/profile/all-projects",
             component: <AllProjects />,
-          }
+          },
         ],
       },
       {
@@ -306,7 +311,7 @@ const routes = [
             key: "edit-user",
             route: "/pages/users/edit-user",
             component: <EditUser />,
-          }
+          },
         ],
       },
       {
@@ -815,7 +820,7 @@ const routes = [
     href: "https://github.com/bal-asha/nurture-ui/blob/main/CHANGELOG.md",
     icon: <CreditCard size="12px" />,
     noCollapse: true,
-  }
+  },
 ];
 
 export default routes;

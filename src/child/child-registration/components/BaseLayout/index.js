@@ -42,27 +42,18 @@ function BaseLayout({ stickyNavbar, children }) {
   const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
-    // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
       return window.innerWidth < breakpoints.values.sm
         ? setTabsOrientation("vertical")
         : setTabsOrientation("horizontal");
     }
 
-    /** 
-     The event listener that's calling the handleTabsOrientation function when resizing the window.
-    */
     window.addEventListener("resize", handleTabsOrientation);
 
-    // Call the handleTabsOrientation function to set the state with the initial value.
     handleTabsOrientation();
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
-
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
-  const handleFormSubmit = () => {};
 
   return (
     <DashboardLayout>
@@ -76,7 +67,7 @@ function BaseLayout({ stickyNavbar, children }) {
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
             <SoftBox display="flex" justifyContent="flex-end">
-              <SoftButton variant="gradient" color="info">
+              <SoftButton variant="gradient" color="info" type="submit">
                 Register
               </SoftButton>
             </SoftBox>
@@ -97,12 +88,10 @@ function BaseLayout({ stickyNavbar, children }) {
   );
 }
 
-// Setting default values for the props of BaseLayout
 BaseLayout.defaultProps = {
   stickyNavbar: false,
 };
 
-// Typechecking props for BaseLayout
 BaseLayout.propTypes = {
   stickyNavbar: PropTypes.bool,
   children: PropTypes.node.isRequired,

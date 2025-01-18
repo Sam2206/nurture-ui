@@ -11,7 +11,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState ,useContext} from "react";
+import { useState, useContext } from "react";
 
 // formik components
 import { Formik, Form } from "formik";
@@ -52,12 +52,12 @@ function getSteps() {
   return ["User Info", "Address"];
 }
 
-function getStepContent(stepIndex, formData,updateUserInfoDetail,updateAdressDetail) {
+function getStepContent(stepIndex, formData, updateUserInfoDetail, updateAdressDetail) {
   switch (stepIndex) {
     case 0:
       return <UserInfo formData={formData} updateUserInfoDetail={updateUserInfoDetail} />;
     case 1:
-      return <Address formData={formData} updateAdressDetail={updateAdressDetail}/>;
+      return <Address formData={formData} updateAdressDetail={updateAdressDetail} />;
     default:
       return null;
   }
@@ -69,21 +69,18 @@ function NewUser() {
   const { formId, formField } = form;
   const currentValidation = validations[activeStep];
   const isLastStep = activeStep === steps.length - 1;
-  const [data,setData]=useState("");
-  const [user,setUser]=useState("");
-  const [idProofType,setIdProofType]=useState("Adhar");
-  const [state,setState]=useState(null);
-  const userSessionDetail=useContext(UserContext);
+  const [data, setData] = useState("");
+  const [user, setUser] = useState("");
+  const [idProofType, setIdProofType] = useState("Adhar");
+  const [state, setState] = useState(null);
+  const userSessionDetail = useContext(UserContext);
 
-
-
-
-  const updateUserInfoDetail =(idProofType_)=>{
+  const updateUserInfoDetail = (idProofType_) => {
     setIdProofType(idProofType_);
-  }
-  const updateAdressDetail= (state_)=>{
-   setState(state_);
-  }
+  };
+  const updateAdressDetail = (state_) => {
+    setState(state_);
+  };
 
   const sleep = (ms) =>
     new Promise((resolve) => {
@@ -94,40 +91,38 @@ function NewUser() {
   const submitForm = async (values, actions) => {
     await sleep(1000);
 
-    let userDetail=values;
-    userDetail ={
-      
-      ...userDetail,  // Spread the previous state
+    let userDetail = values;
+    userDetail = {
+      ...userDetail, // Spread the previous state
       idProofType: idProofType, // Add or update properties
-      userEmail: userSessionDetail.userEmail
+      userEmail: userSessionDetail.userEmail,
     };
-    let userDetaill ={     
-      userName:userDetail.userName,
-      mobileNo:userDetail.mobileNo,
-      idDtls:userDetail.idDtls,
-      address:{
-        address1:userDetail.address1,
-        address2:userDetail.address2,
-        city:userDetail.city,
-        zip:userDetail.zip
-      },  
+    let userDetaill = {
+      userName: userDetail.userName,
+      mobileNo: userDetail.mobileNo,
+      idDtls: userDetail.idDtls,
+      address: {
+        address1: userDetail.address1,
+        address2: userDetail.address2,
+        city: userDetail.city,
+        zip: userDetail.zip,
+      },
       idProofType: idProofType, // Add or update properties
-      userEmail: userSessionDetail.userEmail
+      userEmail: userSessionDetail.userEmail,
     };
     // eslint-disable-next-line no-alert
-    alert(JSON.stringify(userDetaill, null, 2)) ;
+    alert(JSON.stringify(userDetaill, null, 2));
 
-    
-    const locationsUri = '/update-user';
-    axiosInstance.put(locationsUri,userDetaill).then(data => {setUser(data);
-      console.log("hiiii");
-    }).catch((err) => {
-    console.error(err)
-    });
-
+    const locationsUri = "/update-user";
+    axiosInstance
+      .put(locationsUri, userDetaill)
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-
 
   const handleSubmit = (values, actions) => {
     if (isLastStep) {
@@ -162,12 +157,17 @@ function NewUser() {
                   <Card sx={{ height: "100%" }}>
                     <SoftBox p={2}>
                       <SoftBox>
-                        {getStepContent(activeStep, {
-                          values,
-                          touched,
-                          formField,
-                          errors,
-                        },updateUserInfoDetail,updateAdressDetail)}
+                        {getStepContent(
+                          activeStep,
+                          {
+                            values,
+                            touched,
+                            formField,
+                            errors,
+                          },
+                          updateUserInfoDetail,
+                          updateAdressDetail
+                        )}
                         <SoftBox mt={2} width="100%" display="flex" justifyContent="space-between">
                           {activeStep === 0 ? (
                             <SoftBox />
