@@ -56,22 +56,20 @@ function BaseLayout({ stickyNavbar, children }) {
   }, [tabsOrientation]);
 
   return (
-    <DashboardLayout>
-      <DashboardNavbar absolute={!stickyNavbar} isMini />
-      <SoftBox mt={stickyNavbar ? 3 : 10}>
-        <Grid container>
-          <Grid item xs={12} sm={6} lg={6}>
-            <SoftBox p={3}>
-              <SoftTypography variant="h5">Child Registration</SoftTypography>
-            </SoftBox>
-          </Grid>
-          <Grid item xs={12} sm={6} lg={6}>
-            <SoftBox display="flex" justifyContent="flex-end">
-              <SoftButton variant="gradient" color="info" type="submit">
-                Register
-              </SoftButton>
-            </SoftBox>
-            {/* <AppBar position="static">
+    <SoftBox mt={stickyNavbar ? 3 : 10}>
+      <Grid container>
+        <Grid item xs={12} sm={6} lg={6}>
+          <SoftBox p={3}>
+            <SoftTypography variant="h5">Child Registration</SoftTypography>
+          </SoftBox>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={6}>
+          <SoftBox display="flex" justifyContent="flex-end">
+            <SoftButton variant="gradient" color="info" type="submit">
+              Register
+            </SoftButton>
+          </SoftBox>
+          {/* <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab label="Stage1" />
                 {/* <Tab label="Social" />
@@ -79,12 +77,10 @@ function BaseLayout({ stickyNavbar, children }) {
                 <Tab label="Backup" /> 
               </Tabs>  
             </AppBar> */}
-          </Grid>
         </Grid>
-        {children}
-      </SoftBox>
-      <Footer />
-    </DashboardLayout>
+      </Grid>
+      {children}
+    </SoftBox>
   );
 }
 

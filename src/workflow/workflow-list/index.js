@@ -44,6 +44,8 @@ import Footer from "examples/Footer";
 import { boards } from "workflow/workflow-management/data";
 import Step from "workflow/workflow-management/step-creation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import WorkflowList from "workflow/workflow-list/workflow";
+import StepList from "workflow/workflow-list/step";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Tooltip from "@mui/material/Tooltip";
@@ -53,36 +55,26 @@ import DataTable from "examples/Tables/DataTable";
 import axiosInstance from "platform/axiosConfig";
 // @mui material components
 import Checkbox from "@mui/material/Checkbox";
-import Workflow from "./workflow-creation";
 
 // Use BoardComponent as you normally would
 
-function WorkFlowMangement() {
-  // const [steps, setSteps] = useState([
-  //   { id: "1", content: "Police Verification", order: 1, x: 1 },
-  //   { id: "2", content: "TV Telecasting", order: 2, x: 2 },
-  //   { id: "3", content: "Step 3", order: 3, x: 3 },
-  //   { id: "4", content: "Step 4", order: 4, x: 4 },
-  // ]);
+function WorkFlowL() {
+  const [stepList, setStepList] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const [workflowList, setWorkflowList] = useState(null);
+
+  useEffect(() => {}, []);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <StepList />
 
-      <SoftBox py={3}>
-        <Grid container spacing={2}>
-          <Grid item xs={6} lg={6}>
-            <Step />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Workflow />
-          </Grid>
-        </Grid>
-      </SoftBox>
-
+      <WorkflowList />
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default WorkFlowMangement;
+export default WorkFlowL;

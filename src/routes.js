@@ -95,10 +95,12 @@ import Error500 from "layouts/authentication/error/500";
 //Mumkin
 import ChildrenList from "child/children-list";
 import ChildRegistration from "child/child-registration";
+import ChildCaseSummary from "child/child-case";
 import ChildEntryForm from "child/child-entry-form";
-import WorkFlow from "workflow/workflow-management";
+import WorkFlowMangement from "workflow/workflow-management";
 import MumkinDashboard from "dashboard/mumkin-dashboard";
 import EmployeeRegistration from "user/new-user";
+import WorkFlowL from "workflow/workflow-list";
 
 // BalAsha - Nurture icons
 import Shop from "examples/Icons/Shop";
@@ -167,6 +169,12 @@ const routes = [
         route: "/child/children-list",
         component: <ChildrenList />,
       },
+      {
+        name: "Case Page",
+        key: "children-case-summary",
+        route: "/child/hildCaseSummary",
+        component: <ChildCaseSummary />,
+      },
     ],
   },
 
@@ -180,14 +188,20 @@ const routes = [
         name: "Workflow",
         key: "workflow-management",
         route: "/workflow/workflow-management",
-        component: <WorkFlow />,
+        component: <WorkFlowMangement />,
+      },
+      {
+        name: "View Workflows",
+        key: "workflow-list",
+        route: "/workflow/workflow-list",
+        component: <WorkFlowL />,
       },
     ],
   },
 
-  { type: "divider", title: "Template Pages", key: "template-pages" },
+  { type: "divider", title: "Template Pages", key: "template-pages-1" },
 
-  { type: "title", title: "Template Pages", key: "template-pages" },
+  { type: "title", title: "Template Pages", key: "template-pages-2" },
   {
     type: "collapse",
     name: "Dashboards",

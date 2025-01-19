@@ -30,14 +30,15 @@ function ActionCell({ childId }) {
     navigate("/child/child-registration", { state: { childId: childId } });
   };
   const handleOpen = () => {
-    navigate("/about/123", { state: { childId: childId } });
+    // navigate("/child/child-workflow/16");
+    navigate("/child/child-workflow/1");
   };
 
   return (
     <SoftBox display="flex" alignItems="center">
       <SoftBox mx={2}>
         <SoftTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-          <Tooltip title="Edit product" placement="top">
+          <Tooltip title="Update Child Detail" placement="top">
             <IconButton size="small" aria-label="edit" color="inherit" onClick={handleEdit}>
               <Icon fontSize="small">edit</Icon>
             </IconButton>

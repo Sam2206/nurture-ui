@@ -53,36 +53,57 @@ import DataTable from "examples/Tables/DataTable";
 import axiosInstance from "platform/axiosConfig";
 // @mui material components
 import Checkbox from "@mui/material/Checkbox";
-import Workflow from "./workflow-creation";
 
 // Use BoardComponent as you normally would
 
-function WorkFlowMangement() {
-  // const [steps, setSteps] = useState([
-  //   { id: "1", content: "Police Verification", order: 1, x: 1 },
-  //   { id: "2", content: "TV Telecasting", order: 2, x: 2 },
-  //   { id: "3", content: "Step 3", order: 3, x: 3 },
-  //   { id: "4", content: "Step 4", order: 4, x: 4 },
-  // ]);
+function WorkFlowList() {
+  const [stepList, setStepList] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const [workflowList, setWorkflowList] = useState(null);
+
+  const gridColumns = [
+    { Header: "Id", accessor: "workflowId", width: "10%" },
+    { Header: "Name", accessor: "workflowName", width: "20%" },
+    { Header: "Description", accessor: "workflowDesc", width: "20%" },
+  ];
+  useEffect(() => {
+    const fetchSteps = async () => {
+      try {
+        const response = await axiosInstance.get("/api/v1/workflows");
+        console.log(response.data);
+        const formattedRows = response.data.map((workflow) => ({
+          workflowId: workflow.workflowId || "N/A",
+          workflowName: workflow.workflowName || "N/A",
+          workflowDesc: workflow.workflowDesc || "N/A",
+        }));
+        setStepList({
+          columns: gridColumns,
+          rows: formattedRows,
+        });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSteps();
+  }, []);
 
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-
-      <SoftBox py={3}>
-        <Grid container spacing={2}>
-          <Grid item xs={6} lg={6}>
-            <Step />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Workflow />
-          </Grid>
-        </Grid>
+    <Grid item xs={12} lg={6}>
+      <SoftBox pt={6} pb={3}>
+        <Card>
+          <SoftBox p={3} lineHeight={1}>
+            <SoftTypography variant="h5" fontWeight="medium">
+              All Workflows
+            </SoftTypography>
+          </SoftBox>
+          {stepList && <DataTable table={stepList} canSearch />}
+        </Card>
       </SoftBox>
-
-      <Footer />
-    </DashboardLayout>
+    </Grid>
   );
 }
 
-export default WorkFlowMangement;
+export default WorkFlowList;
