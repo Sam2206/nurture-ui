@@ -41,6 +41,12 @@ UI for Bala Asha App
    http://localhost:3000
    ```
 
+### Running with azure static web apps CLI (simulated azure environment)
+```
+npm install -g @azure/static-web-apps-cli
+swa start build 
+```
+
 
 ## Some Details about underlying framework
 Start your Development with an Innovative Admin Template for MUI and React. If you like the look & feel of the hottest design trend right now, Soft UI, you will fall in love with this dashboard! It features a huge number of components built to fit together and look amazing.
